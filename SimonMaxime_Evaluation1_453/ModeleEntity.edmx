@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ModelEntity.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategorieID" />
+          </Key>
+          <Property Name="CategorieID" Type="int" Nullable="false" />
+          <Property Name="NomCategorie" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Description" Type="ntext" />
+          <Property Name="Photo" Type="image" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="nchar" MaxLength="5" Nullable="false" />
+          <Property Name="NomCompagnie" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="NomContact" Type="nvarchar" MaxLength="30" />
+          <Property Name="TitreContact" Type="nvarchar" MaxLength="30" />
+          <Property Name="Adresse" Type="nvarchar" MaxLength="60" />
+          <Property Name="Province" Type="nvarchar" MaxLength="15" />
+          <Property Name="CodePostal" Type="nvarchar" MaxLength="10" />
+          <Property Name="Pays" Type="nvarchar" MaxLength="15" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="24" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="24" />
+        </EntityType>
+        <EntityType Name="Commandes">
+          <Key>
+            <PropertyRef Name="CommandeID" />
+          </Key>
+          <Property Name="CommandeID" Type="int" Nullable="false" />
+          <Property Name="ClientID" Type="nchar" MaxLength="5" />
+          <Property Name="EmployeID" Type="int" />
+          <Property Name="DateCommande" Type="datetime" />
+          <Property Name="DateRequise" Type="datetime" />
+          <Property Name="DateEnvoi" Type="datetime" />
+          <Property Name="AdresseEnvoi" Type="nvarchar" MaxLength="60" />
+          <Property Name="VilleEnvoi" Type="nvarchar" MaxLength="15" />
+          <Property Name="CodePostalEnvoi" Type="nvarchar" MaxLength="10" />
+          <Property Name="PaysEnvoi" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Evaluation1.dbo.EmployeeTerritories' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EmployeeTerritories">
+          <Key>
+            <PropertyRef Name="EmployeID" />
+            <PropertyRef Name="TerritoryID" />
+          </Key>
+          <Property Name="EmployeID" Type="int" Nullable="false" />
+          <Property Name="TerritoryID" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employes">
+          <Key>
+            <PropertyRef Name="EmployeID" />
+          </Key>
+          <Property Name="EmployeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Titre" Type="nvarchar" MaxLength="30" />
+          <Property Name="DateDeNaissance" Type="datetime" />
+          <Property Name="DateEmbauche" Type="datetime" />
+          <Property Name="Adresse" Type="nvarchar" MaxLength="60" />
+          <Property Name="Province" Type="nvarchar" MaxLength="15" />
+          <Property Name="CodePostal" Type="nvarchar" MaxLength="10" />
+          <Property Name="Pays" Type="nvarchar" MaxLength="15" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="24" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="4" />
+          <Property Name="Notes" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Produits">
+          <Key>
+            <PropertyRef Name="ProduitID" />
+          </Key>
+          <Property Name="ProduitID" Type="int" Nullable="false" />
+          <Property Name="NomProduit" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="CategorieID" Type="int" />
+          <Property Name="QuantiteParUnite" Type="nvarchar" MaxLength="20" />
+          <Property Name="PrixUnite" Type="money" />
+          <Property Name="UnitesEnStock" Type="smallint" />
+          <Property Name="UnitesSurCommande" Type="smallint" />
+          <Property Name="Discontinu" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Evaluation1.dbo.Territories' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Territories">
+          <Key>
+            <PropertyRef Name="TerritoryID" />
+            <PropertyRef Name="TerritoryDescription" />
+            <PropertyRef Name="ProvinceID" />
+          </Key>
+          <Property Name="TerritoryID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TerritoryDescription" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProvinceID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Commandes_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Commandes" Type="Self.Commandes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Commandes">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commandes_Employes">
+          <End Role="Employes" Type="Self.Employes" Multiplicity="0..1" />
+          <End Role="Commandes" Type="Self.Commandes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employes">
+              <PropertyRef Name="EmployeID" />
+            </Principal>
+            <Dependent Role="Commandes">
+              <PropertyRef Name="EmployeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produits_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Produits" Type="Self.Produits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategorieID" />
+            </Principal>
+            <Dependent Role="Produits">
+              <PropertyRef Name="CategorieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelEntityStoreContainer">
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commandes" EntityType="Self.Commandes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employes" EntityType="Self.Employes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produits" EntityType="Self.Produits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeTerritories" EntityType="Self.EmployeeTerritories" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EmployeeTerritories].[EmployeID] AS [EmployeID], 
+    [EmployeeTerritories].[TerritoryID] AS [TerritoryID]
+    FROM [dbo].[EmployeeTerritories] AS [EmployeeTerritories]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Territories" EntityType="Self.Territories" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Territories].[TerritoryID] AS [TerritoryID], 
+    [Territories].[TerritoryDescription] AS [TerritoryDescription], 
+    [Territories].[ProvinceID] AS [ProvinceID]
+    FROM [dbo].[Territories] AS [Territories]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Commandes_Clients" Association="Self.FK_Commandes_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Commandes" EntitySet="Commandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commandes_Employes" Association="Self.FK_Commandes_Employes">
+            <End Role="Employes" EntitySet="Employes" />
+            <End Role="Commandes" EntitySet="Commandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produits_Categories" Association="Self.FK_Produits_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Produits" EntitySet="Produits" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ModelEntity" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategorieID" />
+          </Key>
+          <Property Name="CategorieID" Type="Int32" Nullable="false" />
+          <Property Name="NomCategorie" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Produits" Relationship="Self.FK_Produits_Categories" FromRole="Categories" ToRole="Produits" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NomCompagnie" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NomContact" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TitreContact" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Adresse" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Province" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CodePostal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Pays" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Commandes" Relationship="Self.FK_Commandes_Clients" FromRole="Clients" ToRole="Commandes" />
+        </EntityType>
+        <EntityType Name="Commande">
+          <Key>
+            <PropertyRef Name="CommandeID" />
+          </Key>
+          <Property Name="CommandeID" Type="Int32" Nullable="false" />
+          <Property Name="ClientID" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="EmployeID" Type="Int32" />
+          <Property Name="DateCommande" Type="DateTime" Precision="3" />
+          <Property Name="DateRequise" Type="DateTime" Precision="3" />
+          <Property Name="DateEnvoi" Type="DateTime" Precision="3" />
+          <Property Name="AdresseEnvoi" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="VilleEnvoi" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CodePostalEnvoi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PaysEnvoi" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Commandes_Clients" FromRole="Commandes" ToRole="Clients" />
+          <NavigationProperty Name="Employe" Relationship="Self.FK_Commandes_Employes" FromRole="Commandes" ToRole="Employes" />
+        </EntityType>
+        <EntityType Name="Employe">
+          <Key>
+            <PropertyRef Name="EmployeID" />
+          </Key>
+          <Property Name="EmployeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Titre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DateDeNaissance" Type="DateTime" Precision="3" />
+          <Property Name="DateEmbauche" Type="DateTime" Precision="3" />
+          <Property Name="Adresse" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Province" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CodePostal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Pays" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="Extension" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Commandes" Relationship="Self.FK_Commandes_Employes" FromRole="Employes" ToRole="Commandes" />
+        </EntityType>
+        <EntityType Name="Produit">
+          <Key>
+            <PropertyRef Name="ProduitID" />
+          </Key>
+          <Property Name="ProduitID" Type="Int32" Nullable="false" />
+          <Property Name="NomProduit" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategorieID" Type="Int32" />
+          <Property Name="QuantiteParUnite" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PrixUnite" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="UnitesEnStock" Type="Int16" />
+          <Property Name="UnitesSurCommande" Type="Int16" />
+          <Property Name="Discontinu" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Produits_Categories" FromRole="Produits" ToRole="Categories" />
+        </EntityType>
+        <EntityType Name="EmployeeTerritory">
+          <Key>
+            <PropertyRef Name="EmployeID" />
+            <PropertyRef Name="TerritoryID" />
+          </Key>
+          <Property Name="EmployeID" Type="Int32" Nullable="false" />
+          <Property Name="TerritoryID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Territory">
+          <Key>
+            <PropertyRef Name="TerritoryID" />
+            <PropertyRef Name="TerritoryDescription" />
+            <PropertyRef Name="ProvinceID" />
+          </Key>
+          <Property Name="TerritoryID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TerritoryDescription" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ProvinceID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Produits_Categories">
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Produits" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategorieID" />
+            </Principal>
+            <Dependent Role="Produits">
+              <PropertyRef Name="CategorieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commandes_Clients">
+          <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Commandes" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Commandes">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commandes_Employes">
+          <End Role="Employes" Type="Self.Employe" Multiplicity="0..1" />
+          <End Role="Commandes" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employes">
+              <PropertyRef Name="EmployeID" />
+            </Principal>
+            <Dependent Role="Commandes">
+              <PropertyRef Name="EmployeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Evaluation1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Commandes" EntityType="Self.Commande" />
+          <EntitySet Name="Employes" EntityType="Self.Employe" />
+          <EntitySet Name="Produits" EntityType="Self.Produit" />
+          <EntitySet Name="EmployeeTerritories" EntityType="Self.EmployeeTerritory" />
+          <EntitySet Name="Territories" EntityType="Self.Territory" />
+          <AssociationSet Name="FK_Produits_Categories" Association="Self.FK_Produits_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Produits" EntitySet="Produits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commandes_Clients" Association="Self.FK_Commandes_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Commandes" EntitySet="Commandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commandes_Employes" Association="Self.FK_Commandes_Employes">
+            <End Role="Employes" EntitySet="Employes" />
+            <End Role="Commandes" EntitySet="Commandes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelEntityStoreContainer" CdmEntityContainer="Evaluation1Entities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="ModelEntity.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CategorieID" ColumnName="CategorieID" />
+                <ScalarProperty Name="NomCategorie" ColumnName="NomCategorie" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="ModelEntity.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="NomCompagnie" ColumnName="NomCompagnie" />
+                <ScalarProperty Name="NomContact" ColumnName="NomContact" />
+                <ScalarProperty Name="TitreContact" ColumnName="TitreContact" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Pays" ColumnName="Pays" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commandes">
+            <EntityTypeMapping TypeName="ModelEntity.Commande">
+              <MappingFragment StoreEntitySet="Commandes">
+                <ScalarProperty Name="CommandeID" ColumnName="CommandeID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="EmployeID" ColumnName="EmployeID" />
+                <ScalarProperty Name="DateCommande" ColumnName="DateCommande" />
+                <ScalarProperty Name="DateRequise" ColumnName="DateRequise" />
+                <ScalarProperty Name="DateEnvoi" ColumnName="DateEnvoi" />
+                <ScalarProperty Name="AdresseEnvoi" ColumnName="AdresseEnvoi" />
+                <ScalarProperty Name="VilleEnvoi" ColumnName="VilleEnvoi" />
+                <ScalarProperty Name="CodePostalEnvoi" ColumnName="CodePostalEnvoi" />
+                <ScalarProperty Name="PaysEnvoi" ColumnName="PaysEnvoi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employes">
+            <EntityTypeMapping TypeName="ModelEntity.Employe">
+              <MappingFragment StoreEntitySet="Employes">
+                <ScalarProperty Name="EmployeID" ColumnName="EmployeID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="DateDeNaissance" ColumnName="DateDeNaissance" />
+                <ScalarProperty Name="DateEmbauche" ColumnName="DateEmbauche" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Pays" ColumnName="Pays" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produits">
+            <EntityTypeMapping TypeName="ModelEntity.Produit">
+              <MappingFragment StoreEntitySet="Produits">
+                <ScalarProperty Name="ProduitID" ColumnName="ProduitID" />
+                <ScalarProperty Name="NomProduit" ColumnName="NomProduit" />
+                <ScalarProperty Name="CategorieID" ColumnName="CategorieID" />
+                <ScalarProperty Name="QuantiteParUnite" ColumnName="QuantiteParUnite" />
+                <ScalarProperty Name="PrixUnite" ColumnName="PrixUnite" />
+                <ScalarProperty Name="UnitesEnStock" ColumnName="UnitesEnStock" />
+                <ScalarProperty Name="UnitesSurCommande" ColumnName="UnitesSurCommande" />
+                <ScalarProperty Name="Discontinu" ColumnName="Discontinu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeTerritories">
+            <EntityTypeMapping TypeName="ModelEntity.EmployeeTerritory">
+              <MappingFragment StoreEntitySet="EmployeeTerritories">
+                <ScalarProperty Name="EmployeID" ColumnName="EmployeID" />
+                <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Territories">
+            <EntityTypeMapping TypeName="ModelEntity.Territory">
+              <MappingFragment StoreEntitySet="Territories">
+                <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
+                <ScalarProperty Name="TerritoryDescription" ColumnName="TerritoryDescription" />
+                <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
