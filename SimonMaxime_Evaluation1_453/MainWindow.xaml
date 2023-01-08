@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimonMaxime_Evaluation1_453"
         mc:Ignorable="d"
-        Title="MainWindow" Height="850" Width="881">
+        Title="Liste employés/commandes" Height="850" Width="900" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <!-- Les Label : la classe TextBlock -->
