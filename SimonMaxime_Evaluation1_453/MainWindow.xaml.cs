@@ -178,6 +178,24 @@ namespace SimonMaxime_Evaluation1_453
                 return;
             }
 
+            // On vérifie si les 2 employés sont les mêmes
+            if (employeSelectionne.Nom == textBoxNom.Text
+                && employeSelectionne.Prenom == textBoxPrenom.Text
+                && employeSelectionne.Titre == textBoxTitre.Text
+                && employeSelectionne.DateDeNaissance == textBoxDateNaissance.SelectedDate.Value
+                && employeSelectionne.DateEmbauche == textBoxDateEmbauche.SelectedDate.Value
+                && employeSelectionne.Adresse == textBoxAdresse.Text
+                && employeSelectionne.Telephone == textBoxTelephone.Text
+                && employeSelectionne.Extension == textBoxExtension.Text
+                && employeSelectionne.Province == textBoxProvince.Text
+                && employeSelectionne.CodePostal == textBoxCodePostal.Text
+                && employeSelectionne.Pays == textBoxPays.Text
+                && employeSelectionne.Notes == textBoxNotes.Text)
+            {
+                afficherMessageErreur("Aucun changement n'a été fait.");
+                return;
+            }
+
             using (dbEntities = new Evaluation1Entities())
             {
                 Employe employeModifie = dbEntities.Employes.FirstOrDefault(x => x.EmployeID == employeSelectionne.EmployeID);
@@ -185,12 +203,6 @@ namespace SimonMaxime_Evaluation1_453
                 if (employeModifie == null)
                 {
                     afficherMessageErreur("Impossible de trouver l'employé '" + employeModifie.Prenom + " " + employeModifie.Nom + "' dans la base de données.");
-                    return;
-                }
-                // On vérifie si les 2 employés sont les mêmes
-                if (employeSelectionne == employeModifie)
-                {
-                    afficherMessageErreur("Aucun changement n'a été fait.");
                     return;
                 }
 
