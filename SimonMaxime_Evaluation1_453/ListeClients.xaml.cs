@@ -20,20 +20,14 @@ namespace SimonMaxime_Evaluation1_453
     /// </summary>
     public partial class ListeClients : Window
     {
-        public ListeClients()
+
+        //private IEnumerable<Client> _clients;
+        public ListeClients(IEnumerable<Client> listClients)
         {
             InitializeComponent();
-            AfficherClients();
+            ListViewClients.ItemsSource = listClients;
+
         }
 
-        private void AfficherClients()
-        {
-            using (Evaluation1Entities dbEntities = new Evaluation1Entities())
-            {
-                listViewDataBase_Clients.ItemsSource = dbEntities.Clients.ToList();
-            }
-        }
     }
-
-    
 }

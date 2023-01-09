@@ -48,9 +48,9 @@
                         <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding EmployeID}"/>
                         <GridViewColumn Header="Nom" Width="75" DisplayMemberBinding="{Binding Nom}"/>
                         <GridViewColumn Header="Prénom" Width="75" DisplayMemberBinding="{Binding Prenom}"/>
-                        <GridViewColumn Header="Titre" Width="65" DisplayMemberBinding="{Binding Titre}"/>
+                        <GridViewColumn Header="Titre" Width="auto" DisplayMemberBinding="{Binding Titre}"/>
                         <GridViewColumn Header="Date Naiss." Width="80" DisplayMemberBinding="{Binding DateDeNaissance, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                        <GridViewColumn Header="Adresse" Width="160" DisplayMemberBinding="{Binding Adresse}"/>
+                        <GridViewColumn Header="Adresse" Width="auto" DisplayMemberBinding="{Binding Adresse}"/>
                         <GridViewColumn Header="Téléphone" Width="100" DisplayMemberBinding="{Binding Telephone}"/>
                         <GridViewColumn Header="Ext." Width="40" DisplayMemberBinding="{Binding Extension}"/>
                         <GridViewColumn Header="Province" Width="95" DisplayMemberBinding="{Binding Province}"/>
@@ -68,8 +68,8 @@
             </ListView>
         </ScrollViewer>
 
-        <Button x:Name="btnModifier" Content="Modifier" HorizontalAlignment="Left" Margin="10,553,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnModifier_Click" />
-        <Button x:Name="btnSupprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="100,553,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnSupprimer_Click"/>
+        <Button x:Name="btnModifier" Content="Modifier" HorizontalAlignment="Left" Margin="10,527,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnModifier_Click" />
+        <Button x:Name="btnSupprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="100,527,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnSupprimer_Click"/>
 
         <Label Margin="3,595,0,0" x:Name="labelCommandeEmploye" Content="Employé Selectionné:"  />
         <Label Margin="130,595,0,0" x:Name="labelCommandeEmployeNom" Content="Aucun employé sélectionné" FontWeight="Bold" />

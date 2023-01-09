@@ -247,12 +247,33 @@ namespace SimonMaxime_Evaluation1_453
                     return;
                 }
 
+                // On récupère la liste des commandes faites par l'employé à supprimer
+                var listeDeCommandsASupprimer = (from c in dbEntities.Commandes
+                                                 where c.EmployeID == employeASupprime.EmployeID
+                                                 select c).ToList();
+
+                // On suprime toute les commandes de l'employé avant de supprimer
+                // l'employé pour conserver l'intégrité de la base de données
+                foreach (var commande in listeDeCommandsASupprimer)
+                {
+                    dbEntities.Commandes.Remove(commande);
+                }
+
+                // Suppression de l'employé
                 dbEntities.Employes.Remove(employeASupprime);
                 int resultat = dbEntities.SaveChanges();
                 if (resultat <= 0)
                 {
                     afficherMessageErreur("Un problème est survenu lors de la sauvegarde de la base de données.\nCode d'erreur: " + resultat.ToString());
                     return;
+                }
+                if (employeCommande != null)
+                {
+                    if (employeCommande.EmployeID == employeASupprime.EmployeID) {
+                        ListViewCommandes.ItemsSource = null;
+                        employeCommande = null;
+                        labelCommandeEmployeNom.Content = "Aucun employé sélectionné";
+                    }
                 }
 
                 // On rafraichit la liste d'employés
