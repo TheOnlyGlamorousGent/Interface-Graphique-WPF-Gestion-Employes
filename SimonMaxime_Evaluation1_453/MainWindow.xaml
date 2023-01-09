@@ -5,101 +5,92 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimonMaxime_Evaluation1_453"
         mc:Ignorable="d"
-        Title="Liste employés/commandes" Height="850" Width="900" WindowStartupLocation="CenterScreen">
+        Title="Liste employés/commandes" Loaded="MainWindow_Loaded" Height="860" Width="900" WindowStartupLocation="CenterScreen">
     <Grid>
-
-        <!-- Les Label : la classe TextBlock -->
-        <TextBlock x:Name="textBlockNom" HorizontalAlignment="Left" Height="23" Margin="24,36,0,0" TextWrapping="Wrap" 
-                   Text="Nom :" VerticalAlignment="Top" Width="46"/>
-        <TextBlock x:Name="textBlockAdresse" HorizontalAlignment="Left" Height="23" Margin="24,67,0,0" TextWrapping="Wrap" 
-                   Text="Adresse :" VerticalAlignment="Top" Width="56"/>
-        <!-- -->
-        <TextBlock x:Name="textBlockPrenom" HorizontalAlignment="Left" Height="23" Margin="296,36,0,0" TextWrapping="Wrap" 
-                   Text="Prénom :" VerticalAlignment="Top" Width="54"/>
-        <TextBlock x:Name="textBlockTelephone" HorizontalAlignment="Left" Height="23" Margin="295,95,0,0" TextWrapping="Wrap" 
-                   Text="Téléphone :" VerticalAlignment="Top" Width="64"/>
-        <!-- -->
-        <TextBlock x:Name="textBlockDateNaissance" HorizontalAlignment="Left" Height="23" Margin="561,36,0,0" TextWrapping="Wrap" 
-                   Text="Date de naissance :" VerticalAlignment="Top" Width="113"/>
-
+        <Label Margin="18,5,0,0" x:Name="labelSelectionEmploye" Content="Employé Selectionné:"  />
+        <Label Margin="137,5,0,0" x:Name="labelSelectionEmployeNom" Content="Aucun employé sélectionné" FontWeight="Bold" />
+        <TextBlock x:Name="textBlockNom" HorizontalAlignment="Left" Height="23" Margin="24,36,0,0" TextWrapping="Wrap" Text="Nom :" VerticalAlignment="Top" Width="46"/>
+        <TextBlock x:Name="textBlockAdresse" HorizontalAlignment="Left" Height="23" Margin="24,67,0,0" TextWrapping="Wrap" Text="Adresse :" VerticalAlignment="Top" Width="56"/>
+        <TextBlock x:Name="textBlockPrenom" HorizontalAlignment="Left" Height="23" Margin="296,36,0,0" TextWrapping="Wrap" Text="Prénom :" VerticalAlignment="Top" Width="54"/>
+        <TextBlock x:Name="textBlockTelephone" HorizontalAlignment="Left" Height="23" Margin="295,95,0,0" TextWrapping="Wrap" Text="Téléphone :" VerticalAlignment="Top" Width="64"/>
+        <TextBlock x:Name="textBlockDateNaissance" HorizontalAlignment="Left" Height="23" Margin="561,36,0,0" TextWrapping="Wrap" Text="Date de naissance :" VerticalAlignment="Top" Width="113"/>
         <TextBlock x:Name="textBlockCourriel" HorizontalAlignment="Left" Margin="294,125,0,0" VerticalAlignment="Top" Width="114"><Run Text="Extension"/><Run Language="fr-ca" Text=" "/><Run Text=":"/></TextBlock>
-
-
-        <!-- Les champs de saisie : TextBox -->
         <TextBox x:Name="textBoxNom" HorizontalAlignment="Left" Margin="97,36,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="160" />
         <TextBox x:Name="textBoxAdresse" HorizontalAlignment="Left" Margin="97,67,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="160"/>
-        <!-- -->
         <TextBox x:Name="textBoxPrenom" HorizontalAlignment="Left" Margin="367,36,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="160"/>
         <TextBox x:Name="textBoxTelephone" HorizontalAlignment="Left" Margin="367,95,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="160"/>
-        <!-- -->
         <DatePicker x:Name="textBoxDateNaissance" HorizontalAlignment="Left" Margin="689,36,0,0"   VerticalAlignment="Top" Width="160"/>
-        <TextBox x:Name="textBoxCourriel" HorizontalAlignment="Left" Margin="367,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
-
+        <TextBox x:Name="textBoxExtension" HorizontalAlignment="Left" Margin="367,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
         <TextBlock x:Name="textBlockProvince" HorizontalAlignment="Left" Height="23" Margin="24,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="56" Text="Province :"/>
         <TextBox x:Name="textBoxProvince" HorizontalAlignment="Left" Margin="97,95,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="160"/>
         <TextBlock x:Name="textBlockCodePostal" HorizontalAlignment="Left" Height="23" Margin="24,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" Text="Code postal :"/>
         <TextBox x:Name="textBoxCodePostal" HorizontalAlignment="Left" Margin="97,125,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="160"/>
         <TextBlock x:Name="textBlockTitre" HorizontalAlignment="Left" Height="23" Margin="296,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" Text="Titre :"/>
         <TextBox x:Name="textBoxTitre" HorizontalAlignment="Left" Margin="367,64,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="160"/>
-
         <TextBlock x:Name="textBlockDateEmbauche" HorizontalAlignment="Left" Height="23" Margin="561,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" Text="Date d'embauche :"/>
-        <DatePicker x:Name="textBoxDateDateEmbauche" HorizontalAlignment="Left" Margin="689,67,0,0"   VerticalAlignment="Top" Width="160"/>
+        <DatePicker x:Name="textBoxDateEmbauche" HorizontalAlignment="Left" Margin="689,67,0,0"   VerticalAlignment="Top" Width="160"/>
         <TextBlock x:Name="textBlockPays" HorizontalAlignment="Left" Height="23" Margin="561,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" Text="Pays :"/>
         <TextBox x:Name="textBoxPays" HorizontalAlignment="Left" Margin="689,100,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="160"/>
-        <TextBlock x:Name="textBlockProduits" HorizontalAlignment="Left" Height="23" Margin="561,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" Text="Produits :"/>
-        <ComboBox ItemsSource="{Binding Path=listeProduits}" x:Name="cbxProduits" HorizontalAlignment="Left" Margin="689,128,0,0" VerticalAlignment="Top" Width="160" Height="18"/>
-        <TextBlock x:Name="textBlockCategories" HorizontalAlignment="Left" Height="23" Margin="561,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="67" Text="Catégories :"/>
-        <ComboBox ItemsSource="{Binding Path=listeCategories}" x:Name="CbxCategories" HorizontalAlignment="Left" Margin="689,158,0,0" VerticalAlignment="Top" Width="160" Height="18"/>
-
+        <TextBlock x:Name="textBlockProduits" HorizontalAlignment="Left" Height="23" Margin="561,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" Text="Produits :"/>
+        <ComboBox ItemsSource="{Binding Path=listeProduits}" x:Name="cbxProduits" HorizontalAlignment="Left" Margin="689,133,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
+        <TextBlock x:Name="textBlockCategories" HorizontalAlignment="Left" Height="23" Margin="561,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="67" Text="Catégories :"/>
+        <ComboBox ItemsSource="{Binding Path=listeCategories}" x:Name="cbxCategories" HorizontalAlignment="Left" Margin="689,164,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
         <TextBlock x:Name="textBlockNotes" HorizontalAlignment="Left" Height="23" Margin="24,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" Text="Notes :"/>
-        <TextBox x:Name="textBoxNotes" HorizontalAlignment="Left" Margin="97,155,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="430" Height="90"/>
-        <!-- Les boutons : la classe Button -->
-        <!-- haut -->
-        <Button x:Name="btnEffacer" Content="Effacer" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnEffacer_Click" />
-        <Button x:Name="btnAjouter" Content="Sauvegarder" HorizontalAlignment="Left" Margin="100,261,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnAjouter_Click"  />
-        <Button x:Name="btnQuitter" Content="Quitter" HorizontalAlignment="Left" Margin="760,261,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnQuitter_Click" />
+        <TextBox x:Name="textBoxNotes" HorizontalAlignment="Left" Margin="97,155,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="430" Height="73"/>
+        <Button x:Name="btnEffacer" Content="Effacer" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnEffacer_Click" />
+        <Button x:Name="btnAjouter" Content="Sauvegarder" HorizontalAlignment="Left" Margin="100,251,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnAjouter_Click"  />
+        <Button x:Name="btnQuitter" Content="Quitter" HorizontalAlignment="Left" Margin="760,251,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnQuitter_Click" />
 
+        <ScrollViewer Margin="0,298,0,286" Height="250"  Width="870" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView x:Name="ListViewEmployes" Height="220" VerticalAlignment="Top" SelectionChanged="listViewDataBase_Employes_SelectionChanged"  MouseDoubleClick="listViewDataBase_Employes_MouseDoubleClick"  Width="870">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding EmployeID}"/>
+                        <GridViewColumn Header="Nom" Width="75" DisplayMemberBinding="{Binding Nom}"/>
+                        <GridViewColumn Header="Prénom" Width="75" DisplayMemberBinding="{Binding Prenom}"/>
+                        <GridViewColumn Header="Titre" Width="65" DisplayMemberBinding="{Binding Titre}"/>
+                        <GridViewColumn Header="Date Naiss." Width="80" DisplayMemberBinding="{Binding DateDeNaissance, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                        <GridViewColumn Header="Adresse" Width="160" DisplayMemberBinding="{Binding Adresse}"/>
+                        <GridViewColumn Header="Téléphone" Width="100" DisplayMemberBinding="{Binding Telephone}"/>
+                        <GridViewColumn Header="Ext." Width="40" DisplayMemberBinding="{Binding Extension}"/>
+                        <GridViewColumn Header="Province" Width="95" DisplayMemberBinding="{Binding Province}"/>
+                        <GridViewColumn Header="Date d'emb." Width="80" DisplayMemberBinding="{Binding DateEmbauche, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                        <GridViewColumn Header="Notes" Width="Auto" DisplayMemberBinding="{Binding Notes}">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}"  >
+                                    <Setter Property="HorizontalContentAlignment" Value="left" />
+                                    <Setter Property="Padding" Value="8,0,0,0" />
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
 
-        <!-- La ListView -->
-        <ListView x:Name="listViewDataBase" Margin="10,298,10,286" SelectionChanged="listViewDataBase_SelectionChanged_Employe" Height="250"  >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding EmployeID}"/>
-                    <GridViewColumn Header="Nom" Width="75" DisplayMemberBinding="{Binding Nom}"/>
-                    <GridViewColumn Header="Prénom" Width="75" DisplayMemberBinding="{Binding Prenom}"/>
-                    <GridViewColumn Header="Titre" Width="65" DisplayMemberBinding="{Binding Titre}"/>
-                    <GridViewColumn Header="Date Naiss." Width="90" DisplayMemberBinding="{Binding DateNaissance, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                    <GridViewColumn Header="Adresse" Width="160" DisplayMemberBinding="{Binding Adresse}"/>
-                    <GridViewColumn Header="Téléphone" Width="90" DisplayMemberBinding="{Binding Telephone}"/>
-                    <GridViewColumn Header="Ext." Width="30" DisplayMemberBinding="{Binding Extension}"/>
-                    <GridViewColumn Header="Province" Width="95" DisplayMemberBinding="{Binding Province}"/>
-                    <GridViewColumn Header="Date d'emb." Width="90" DisplayMemberBinding="{Binding DateEmbauche, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                    <GridViewColumn Header="Notes" Width="85" DisplayMemberBinding="{Binding Notes}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <!-- bas -->
-        <!-- <Button x:Name="btnAfficher" Content="Afficher" HorizontalAlignment="Left" Margin="10,439,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnAfficher_Click" />-->
-        <Button x:Name="btnModifier" Content="Modifier" HorizontalAlignment="Left" Margin="10,565,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnModifier_Click" />
-        <Button x:Name="btnSupprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="100,565,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnSupprimer_Click"/>
+        <Button x:Name="btnModifier" Content="Modifier" HorizontalAlignment="Left" Margin="10,553,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnModifier_Click" />
+        <Button x:Name="btnSupprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="100,553,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnSupprimer_Click"/>
 
-        <!-- La ListView -->
-        <ListView x:Name="listViewDataBase2" Margin="10,612,10,22" SelectionChanged="listViewDataBase_SelectionChanged_Commande" Height="200"  >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="ClientID" Width="65" DisplayMemberBinding="{Binding ClientID}"/>
-                    <GridViewColumn Header="Date Commande" Width="110" DisplayMemberBinding="{Binding DateCommande, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                    <GridViewColumn Header="Date requise" Width="100" DisplayMemberBinding="{Binding DateRequise, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                    <GridViewColumn Header="Date d'envoi" Width="100" DisplayMemberBinding="{Binding DateEnvoi, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                    <GridViewColumn Header="Adresse d'envoi" Width="180" DisplayMemberBinding="{Binding AdresseEnvoi}"/>
-                    <GridViewColumn Header="Ville d'envoi" Width="80" DisplayMemberBinding="{Binding VilleEnvoi}"/>
-                    <GridViewColumn Header="Code postal" Width="80" DisplayMemberBinding="{Binding CodePostal}"/>
-                    <GridViewColumn Header="Pays" Width="80" DisplayMemberBinding="{Binding Pays}"/>
-                    <GridViewColumn Header="EmployeID" Width="85" DisplayMemberBinding="{Binding EmployeID}"/>
+        <Label Margin="3,595,0,0" x:Name="labelCommandeEmploye" Content="Employé Selectionné:"  />
+        <Label Margin="130,595,0,0" x:Name="labelCommandeEmployeNom" Content="Aucun employé sélectionné" FontWeight="Bold" />
 
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <ScrollViewer Margin="0,625,0,22" Height="200"  Width="870" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView x:Name="ListViewCommandes" Height="170" VerticalAlignment="Top" MouseDoubleClick="listViewDataBase_Commandes_MouseDoubleClick"  Width="870" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ClientID" Width="65" DisplayMemberBinding="{Binding ClientID}"/>
+                        <GridViewColumn Header="Date Commande" Width="110" DisplayMemberBinding="{Binding DateCommande, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                        <GridViewColumn Header="Date requise" Width="100" DisplayMemberBinding="{Binding DateRequise, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                        <GridViewColumn Header="Date d'envoi" Width="100" DisplayMemberBinding="{Binding DateEnvoi, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                        <GridViewColumn Header="Adresse d'envoi" Width="180" DisplayMemberBinding="{Binding AdresseEnvoi}"/>
+                        <GridViewColumn Header="Ville d'envoi" Width="80" DisplayMemberBinding="{Binding VilleEnvoi}"/>
+                        <GridViewColumn Header="Code postal" Width="80" DisplayMemberBinding="{Binding CodePostalEnvoi}"/>
+                        <GridViewColumn Header="Pays" Width="80" DisplayMemberBinding="{Binding PaysEnvoi}"/>
+                        <GridViewColumn Header="EmployeID" Width="Auto" DisplayMemberBinding="{Binding EmployeID}"/>
 
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
     </Grid>
 </Window>

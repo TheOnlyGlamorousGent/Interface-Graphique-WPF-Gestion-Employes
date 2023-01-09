@@ -18,11 +18,22 @@ namespace SimonMaxime_Evaluation1_453
     /// <summary>
     /// Interaction logic for ListeClients.xaml
     /// </summary>
-    public partial class ListeClients : Page
+    public partial class ListeClients : Window
     {
         public ListeClients()
         {
             InitializeComponent();
+            AfficherClients();
+        }
+
+        private void AfficherClients()
+        {
+            using (Evaluation1Entities dbEntities = new Evaluation1Entities())
+            {
+                listViewDataBase_Clients.ItemsSource = dbEntities.Clients.ToList();
+            }
         }
     }
+
+    
 }
