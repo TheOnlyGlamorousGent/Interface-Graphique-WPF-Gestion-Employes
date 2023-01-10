@@ -146,6 +146,14 @@ namespace SimonMaxime_Evaluation1_453
 
             using (dbEntities = new Evaluation1Entities())
             {
+                //On est obligé de générer un ID puisqu'il n'y a pas d'auto-identité dans le script SQL qui nous a été donné.
+                //L'ID de l'employé ne peut évidemment pas être null et il n'est pas accessible à partir du GUI, donc il faut 
+                //le créer d'une manière manuelle dû à ce fait. Idéalement, il aurait fallu mettre NOT NULL IDENTITY(1,1) pour la création du ID
+                //et mettre SET IDENTITY_INSERT Employes ON/OFF dans la base de données lorsque les employés sont créés, chose qui n'a pas été faite.
+                //Nous ne pouvons pas modifier le script de création de la BD, donc voici la meilleure solution compte tenu de ce fait.
+                int employeID = (dbEntities.Employes.Max(a => a.EmployeID));
+                nouveauEmploye.EmployeID = ++employeID;
+
                 dbEntities.Employes.Add(nouveauEmploye);
                 int resultat = dbEntities.SaveChanges();
                 if (resultat <= 0)
