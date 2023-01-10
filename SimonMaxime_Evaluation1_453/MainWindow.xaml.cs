@@ -146,7 +146,7 @@ namespace SimonMaxime_Evaluation1_453
 
             using (dbEntities = new Evaluation1Entities())
             {
-                //On est obligé de générer un ID puisqu'il n'y a pas d'auto-identité dans le script SQL qui nous a été donné.
+                //On est obligé de générer un ID puisqu'il n'y a pas d'auto-identité dans le script SQL qui nous a été fourni.
                 //L'ID de l'employé ne peut évidemment pas être null et il n'est pas accessible à partir du GUI, donc il faut 
                 //le créer d'une manière manuelle dû à ce fait. Idéalement, il aurait fallu mettre NOT NULL IDENTITY(1,1) pour la création du ID
                 //et mettre SET IDENTITY_INSERT Employes ON/OFF dans la base de données lorsque les employés sont créés, chose qui n'a pas été faite.
@@ -186,19 +186,19 @@ namespace SimonMaxime_Evaluation1_453
                 return;
             }
 
-            // On vérifie si les 2 employés sont les mêmes
-            if (employeSelectionne.Nom == textBoxNom.Text
-                && employeSelectionne.Prenom == textBoxPrenom.Text
-                && employeSelectionne.Titre == textBoxTitre.Text
+            // On vérifie si les 2 employés sont les mêmes incluant si les valeurs sont nulles, les dates sont des fields obligatoires.
+            if ((employeSelectionne.Nom == textBoxNom.Text || (employeSelectionne.Nom == null && textBoxNom.Text == ""))
+                && (employeSelectionne.Prenom == textBoxPrenom.Text || (employeSelectionne.Prenom == null && textBoxPrenom.Text == ""))
+                && (employeSelectionne.Titre == textBoxTitre.Text || (employeSelectionne.Titre == null && textBoxTitre.Text == ""))
                 && employeSelectionne.DateDeNaissance == textBoxDateNaissance.SelectedDate.Value
                 && employeSelectionne.DateEmbauche == textBoxDateEmbauche.SelectedDate.Value
-                && employeSelectionne.Adresse == textBoxAdresse.Text
-                && employeSelectionne.Telephone == textBoxTelephone.Text
-                && employeSelectionne.Extension == textBoxExtension.Text
-                && employeSelectionne.Province == textBoxProvince.Text
-                && employeSelectionne.CodePostal == textBoxCodePostal.Text
-                && employeSelectionne.Pays == textBoxPays.Text
-                && employeSelectionne.Notes == textBoxNotes.Text)
+                && (employeSelectionne.Adresse == textBoxAdresse.Text || (employeSelectionne.Adresse == null && textBoxAdresse.Text == ""))
+                && (employeSelectionne.Telephone == textBoxTelephone.Text || (employeSelectionne.Telephone == null && textBoxTelephone.Text == ""))
+                && (employeSelectionne.Extension == textBoxExtension.Text || (employeSelectionne.Extension == null && textBoxExtension.Text == ""))
+                && (employeSelectionne.Province == textBoxProvince.Text || (employeSelectionne.Province == null && textBoxProvince.Text == ""))
+                && (employeSelectionne.CodePostal == textBoxCodePostal.Text || (employeSelectionne.CodePostal == null && textBoxCodePostal.Text == ""))
+                && (employeSelectionne.Pays == textBoxPays.Text || (employeSelectionne.Pays == null && textBoxPays.Text == ""))
+                && (employeSelectionne.Notes == textBoxNotes.Text || (employeSelectionne.Notes == null && textBoxNotes.Text == "")))
             {
                 afficherMessageErreur("Aucun changement n'a été fait.");
                 return;
@@ -287,9 +287,11 @@ namespace SimonMaxime_Evaluation1_453
                     afficherMessageErreur("Un problème est survenu lors de la sauvegarde de la base de données.\nCode d'erreur: " + resultat.ToString());
                     return;
                 }
+
                 if (employeCommande != null)
                 {
-                    if (employeCommande.EmployeID == employeASupprime.EmployeID) {
+                    if (employeCommande.EmployeID == employeASupprime.EmployeID)
+                    {
                         ListViewCommandes.ItemsSource = null;
                         employeCommande = null;
                         labelCommandeEmployeNom.Content = "Aucun employé sélectionné";

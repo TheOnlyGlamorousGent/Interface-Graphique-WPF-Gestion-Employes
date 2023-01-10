@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ModelEntity.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Evaluation1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="CategorieID" />
@@ -58,7 +58,7 @@ warning 6002: The table/view 'Evaluation1.dbo.EmployeeTerritories' does not have
           <Key>
             <PropertyRef Name="EmployeID" />
           </Key>
-          <Property Name="EmployeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeID" Type="int" Nullable="false" />
           <Property Name="Nom" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Prenom" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Titre" Type="nvarchar" MaxLength="30" />
@@ -133,7 +133,7 @@ warning 6002: The table/view 'Evaluation1.dbo.Territories' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ModelEntityStoreContainer">
+        <EntityContainer Name="Evaluation1ModelStoreContainer">
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Commandes" EntityType="Self.Commandes" Schema="dbo" store:Type="Tables" />
@@ -169,7 +169,7 @@ warning 6002: The table/view 'Evaluation1.dbo.Territories' does not have a prima
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ModelEntity" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Evaluation1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategorieID" />
@@ -217,7 +217,7 @@ warning 6002: The table/view 'Evaluation1.dbo.Territories' does not have a prima
           <Key>
             <PropertyRef Name="EmployeID" />
           </Key>
-          <Property Name="EmployeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeID" Type="Int32" Nullable="false" />
           <Property Name="Nom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Prenom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Titre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -326,9 +326,9 @@ warning 6002: The table/view 'Evaluation1.dbo.Territories' does not have a prima
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelEntityStoreContainer" CdmEntityContainer="Evaluation1Entities">
+        <EntityContainerMapping StorageEntityContainer="Evaluation1ModelStoreContainer" CdmEntityContainer="Evaluation1Entities">
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="ModelEntity.Category">
+            <EntityTypeMapping TypeName="Evaluation1Model.Category">
               <MappingFragment StoreEntitySet="Categories">
                 <ScalarProperty Name="CategorieID" ColumnName="CategorieID" />
                 <ScalarProperty Name="NomCategorie" ColumnName="NomCategorie" />
@@ -338,7 +338,7 @@ warning 6002: The table/view 'Evaluation1.dbo.Territories' does not have a prima
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="ModelEntity.Client">
+            <EntityTypeMapping TypeName="Evaluation1Model.Client">
               <MappingFragment StoreEntitySet="Clients">
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="NomCompagnie" ColumnName="NomCompagnie" />
@@ -354,7 +354,7 @@ warning 6002: The table/view 'Evaluation1.dbo.Territories' does not have a prima
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Commandes">
-            <EntityTypeMapping TypeName="ModelEntity.Commande">
+            <EntityTypeMapping TypeName="Evaluation1Model.Commande">
               <MappingFragment StoreEntitySet="Commandes">
                 <ScalarProperty Name="CommandeID" ColumnName="CommandeID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
@@ -370,7 +370,7 @@ warning 6002: The table/view 'Evaluation1.dbo.Territories' does not have a prima
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employes">
-            <EntityTypeMapping TypeName="ModelEntity.Employe">
+            <EntityTypeMapping TypeName="Evaluation1Model.Employe">
               <MappingFragment StoreEntitySet="Employes">
                 <ScalarProperty Name="EmployeID" ColumnName="EmployeID" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
@@ -389,7 +389,7 @@ warning 6002: The table/view 'Evaluation1.dbo.Territories' does not have a prima
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Produits">
-            <EntityTypeMapping TypeName="ModelEntity.Produit">
+            <EntityTypeMapping TypeName="Evaluation1Model.Produit">
               <MappingFragment StoreEntitySet="Produits">
                 <ScalarProperty Name="ProduitID" ColumnName="ProduitID" />
                 <ScalarProperty Name="NomProduit" ColumnName="NomProduit" />
@@ -403,7 +403,7 @@ warning 6002: The table/view 'Evaluation1.dbo.Territories' does not have a prima
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EmployeeTerritories">
-            <EntityTypeMapping TypeName="ModelEntity.EmployeeTerritory">
+            <EntityTypeMapping TypeName="Evaluation1Model.EmployeeTerritory">
               <MappingFragment StoreEntitySet="EmployeeTerritories">
                 <ScalarProperty Name="EmployeID" ColumnName="EmployeID" />
                 <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
@@ -411,7 +411,7 @@ warning 6002: The table/view 'Evaluation1.dbo.Territories' does not have a prima
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Territories">
-            <EntityTypeMapping TypeName="ModelEntity.Territory">
+            <EntityTypeMapping TypeName="Evaluation1Model.Territory">
               <MappingFragment StoreEntitySet="Territories">
                 <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
                 <ScalarProperty Name="TerritoryDescription" ColumnName="TerritoryDescription" />
