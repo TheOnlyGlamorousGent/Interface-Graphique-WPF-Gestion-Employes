@@ -12,3 +12,4 @@ Potentielles améliorations:
 - Meilleure structure pour le Grid dans le XAML.
 - Ajout de RegEx pour toutes les boîtes d'entrées de données.
 - Retirer les comboBox de Produits et Catégories puisqu'elles n'ont aucun usage par rapport aux tables affichées (mais c'était nécessaire pour l'énoncé).
+- Ajouter les fonctionnalités CRUD pour toutes les autres tables de la base de données.
