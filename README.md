@@ -1,6 +1,6 @@
 Travail Pratique 1 complété par Maxime et Simon dans le cadre du cours de développement d'applications graphiques 2 pour l'AEC en développement au Collège Rosemont.
 
-Création d'une interface graphique WPF utilisant Entity Framework (.Net 4.8). L'interface permet d'ajouter, de supprimer, d'effacer et de modifier une liste d'employés liée à une base de données MS SQL Server.
+Création d'une interface graphique WPF utilisant Entity Framework (.Net 4.8). L’interface contient toutes les fonctionnalités CRUD permettant d’ajouter, de lire, de modifier, de supprimer et d’effacer une liste d’employés liée à une base de données MS SQL Server.
 
 La liste des employés contient des commandes qui s'affichent à la sélection (double-click) d'un employé. Les commandes, elles, contiennent des clients qui s'affichent dans une deuxième fenêtre à la sélection (double-click) d'une commande.
 
